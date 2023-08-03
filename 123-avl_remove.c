@@ -7,7 +7,7 @@
  */
 void balnc(avl_t **tree)
 {
-	int bnl;
+	int bnval;
 
 	if (tree == NULL || *tree == NULL)
 		return;
@@ -17,11 +17,11 @@ void balnc(avl_t **tree)
 
 	balnc(&(*tree)->left);
 	balnc(&(*tree)->right);
-	bnl = binary_tree_balance((const binary_tree_t *)*tree);
+	bnval = binary_tree_balance((const binary_tree_t *)*tree);
 
-	if (bnl > 1)
+	if (bnval > 1)
 		*tree = binary_tree_rotate_right((binary_tree_t *)*tree);
-	else if (bnl < -1)
+	else if (bnval < -1)
 		*tree = binary_tree_rotate_left((binary_tree_t *)*tree);
 }
 
@@ -50,11 +50,11 @@ int scsor(bst_t *node)
 
 }
 /**
- *rmv_type - its function that removes a node depending on its children
+ *remove_type - its function that removes a node depending on its children
  *@root: is the node to remove
  *Return: 0 if it has no children or other value if there
  */
-int rmv_type(bst_t *root)
+int remove_type(bst_t *root)
 {
 	int new_value = 0;
 
@@ -97,12 +97,12 @@ int rmv_type(bst_t *root)
 	}
 }
 /**
- * bst_rmv - remove a node from a BST tree
+ * bst_remove - remove a node from a BST tree
  * @root: root of the tree
  * @value: node with value to remove
  * Return: the  changed tree
  */
-bst_t *bst_rmv(bst_t *root, int value)
+bst_t *bst_remove(bst_t *root, int value)
 {
 	int type = 0;
 
@@ -114,9 +114,9 @@ bst_t *bst_rmv(bst_t *root, int value)
 		bst_remove(root->right, value);
 	else if (value == root->n)
 	{
-		type = rmv_type(root);
+		type = remove_type(root);
 		if (type != 0)
-			bst_rmv(root->right, type);
+			bst_remove(root->right, type);
 	}
 	else
 		return (NULL);
@@ -124,14 +124,14 @@ bst_t *bst_rmv(bst_t *root, int value)
 }
 
 /**
- * avl_rmv - removes a node from a AVL tree
+ * avl_remove - removes a node from a AVL tree
  * @root: pointer to root of the tree
  * @value: node with this value to remove
  * Return: NULL if nothing
  */
-avl_t *avl_rmv(avl_t *root, int value)
+avl_t *avl_remove(avl_t *root, int value)
 {
-	avl_t *root_a = (avl_t *) bst_rmv((bst_t *) root, value);
+	avl_t *root_a = (avl_t *) bst_remove((bst_t *) root, value);
 
 	if (root_a == NULL)
 		return (NULL);
