@@ -8,11 +8,11 @@
  */
 avl_t *array_to_avl(int *array, size_t size)
 {
-	unsigned int p;
-	avl_t *root = NULL;
+	avl_t *tree = NULL;
+	size_t p;
 
 	for (p = 0; p < size; p++)
-		avl_insert(&root, array[p]);
+		avl_insert(&tree, array[p]);
 
-	return (root);
+	return (tree);
 }
