@@ -1,6 +1,25 @@
 #include "binary_trees.h"
 
 /**
+ * avl_insert - inserts a value into an AVL tree.
+ * @tree: type **pointer to the root node of the AVL tree to insert into.
+ * @value: value to store in the node to be inserted
+ * Return: inserted node, or NULL if fails.
+ */
+avl_t *avl_insert(avl_t **tree, int value)
+{
+	avl_t *new = NULL;
+
+	if (*tree == NULL)
+	{
+		*tree = binary_tree_node(NULL, value);
+		return (*tree);
+	}
+	r_insert_node(tree, *tree, &new, value);
+	return (new);
+}
+
+/**
  * array_to_avl - builds an AVL tree from an array
  * @array: pointer to first element array to be converted
  * @size: number of elements in the array
